@@ -167,4 +167,9 @@ jobs:
           S3_ENDPOINT_URL: ${{ secrets.S3_ENDPOINT_URL }}
           S3_REGION: ${{ secrets.S3_REGION }}
           GITHUB_ACTIONS: true
-        run: python -m trendradar
+          - run: python -m trendradar
+          - name: Publish Summary
+            run: |
+              if [ -f "output/latest_summary.txt" ]; then
+            cat output/latest_summary.txt >> $GITHUB_STEP_SUMMARY
+          fi
